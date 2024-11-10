@@ -45,4 +45,24 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.addEventListener('wheel', handleScroll, { passive: false });
+
+    // Адаптивность для мобильных устройств
+    const handleTouchScroll = (e) => {
+        if (isScrolling) return;
+
+        isScrolling = true;
+        const delta = e.deltaY > 0 ? 1 : -1;
+        const nextSectionIndex = currentSectionIndex + delta;
+
+        if (nextSectionIndex >= 0 && nextSectionIndex < sections.length) {
+            currentSectionIndex = nextSectionIndex;
+            scrollToSection(currentSectionIndex);
+        }
+
+        setTimeout(() => {
+            isScrolling = false;
+        }, 1000); // Задержка в 1 секунду
+    };
+
+    window.addEventListener('touchmove', handleTouchScroll, { passive: false });
 });
