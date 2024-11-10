@@ -16,6 +16,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('rsvp-form');
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        alert('Спасибо за подтверждение! Мы ждем вас на нашей свадьбе.');
+        alert('СПАСИБО ЗА ПОДТВЕРЖДЕНИЕ! МЫ ЖДЕМ ВАС НА НАШЕЙ СВАДЬБЕ.');
+    });
+
+    // Плавная прокрутка
+    sections.forEach((section, index) => {
+        section.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const delta = Math.sign(e.deltaY);
+            const nextSection = sections[index + delta];
+            if (nextSection) {
+                nextSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
     });
 });

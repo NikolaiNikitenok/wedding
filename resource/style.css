@@ -5,6 +5,7 @@ body, html {
     overflow-x: hidden;
     font-family: 'Arial', sans-serif;
     color: #333;
+    scroll-behavior: smooth;
 }
 
 .section {
@@ -14,6 +15,7 @@ body, html {
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
+    text-transform: uppercase;
 }
 
 #section1 {
