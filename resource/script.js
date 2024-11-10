@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('rsvp-form');
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        alert('СПАСИБО ЗА ПОДТВЕРЖДЕНИЕ! МЫ ЖДЕМ ВАС НА НАШЕЙ СВАДЬБЕ.');
+        alert('Спасибо за подтверждение! Мы ждем вас на нашей свадьбе.');
     });
 
     // Плавная прокрутка
@@ -29,5 +29,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 nextSection.scrollIntoView({ behavior: 'smooth' });
             }
         });
+    });
+
+    // Остановка прокрутки при достижении новой секции
+    let isScrolling = false;
+    window.addEventListener('scroll', () => {
+        if (!isScrolling) {
+            isScrolling = true;
+            setTimeout(() => {
+                isScrolling = false;
+            }, 1000); // Задержка в 1 секунду
+        }
     });
 });
