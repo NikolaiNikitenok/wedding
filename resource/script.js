@@ -2,6 +2,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('.section');
     const fadeElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right');
 
+    function checkBlocksVisibility() {
+        let windowHeight = window.innerHeight;
+ 
+        sections.forEach(section => {
+            let sectionPosition = section.getBoundingClientRect().top;
+ 
+            if (sectionPosition => windowHeight - 100) {
+                section.style.opacity = "1";
+                section.style.transform = "translateY(0)";
+            }
+        });
+    }
+
+    checkBlocksVisibility();
+ 
+    window.addEventListener('scroll', function() {
+        checkBlocksVisibility();
+    });
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
