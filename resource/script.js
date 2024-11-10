@@ -20,25 +20,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Плавная прокрутка
-    sections.forEach((section, index) => {
-        section.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            const delta = Math.sign(e.deltaY);
-            const nextSection = sections[index + delta];
-            if (nextSection) {
-                nextSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    });
-
-    // Остановка прокрутки при достижении новой секции
     let isScrolling = false;
-    window.addEventListener('scroll', () => {
-        if (!isScrolling) {
-            isScrolling = true;
-            setTimeout(() => {
-                isScrolling = false;
-            }, 1000); // Задержка в 1 секунду
+    let currentSectionIndex = 0;
+
+    const scrollToSection = (index) => {
+        sections[index].scrollIntoView({ behavior: 'smooth' });
+    };
+
+    const handleScroll = (e) => {
+        if (isScrolling) return;
+
+        isScrolling = true;
+        const delta = Math.sign(e.deltaY);
+        const nextSectionIndex = currentSectionIndex + delta;
+
+        if (nextSectionIndex >= 0 && nextSectionIndex < sections.length) {
+            currentSectionIndex = nextSectionIndex;
+            scrollToSection(currentSectionIndex);
         }
-    });
+
+        setTimeout(() => {
+            isScrolling = false;
+        }, 1000); // Задержка в 1 секунду
+    };
+
+    window.addEventListener('wheel', handleScroll, { passive: false });
 });
