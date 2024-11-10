@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.5 });
 
     fadeElements.forEach(el => observer.observe(el));
 
